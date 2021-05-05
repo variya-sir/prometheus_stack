@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    ports: ['9090:9090']
+    volumes: ['./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml']
+
+  alertmanager:
+     image: prom/alertmanager
+     ports: ['9093:9093']
+     volumes: ['./alertmanager/alertmanager.yml:/alertmanager.yml']
+  
+  grafana:
+    image: grafana/grafana
+    ports: ['3000:3000']
+    volumes: ['./grafana:/etc/grafana/provisioning/']
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "${GF_SECURITY_ADMIN_PASSWORD}"
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+  
+  # Reference: https://github.com/prometheus/cloudwatch_exporter
+  cloudwatch_exporter:
+    image: prom/cloudwatch-exporter
+    ports: ['9106:9106']
+    volumes: ['./cloudwatch_exporter/config.yml:/config/config.yml']
+    environment:
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+      AWS_SESSION_TOKEN: "${AWS_SESSION_TOKEN}"
+
+  # # Reference: https://github.com/prometheus-community/json_exporter
+  # jsonexporter:
+  #   image: quay.io/prometheuscommunity/json-exporter
+  #   ports: ['9107:9107']
+  #   volumes: ['./json_exporter/config.yml:/config.yml']
