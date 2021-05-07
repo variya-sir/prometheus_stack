@@ -1,6 +1,6 @@
 global:
   # TODO: try using makefile and envsubst
-  # alertmanager program can read only input only from .yml file.
+  # alertmanager program can read only input from .yml file.
   # It does not support for getting environment variable 
   smtp_smarthost: 'smtp.gmail.com:587'
   smtp_from: '$SMTPFROM'
