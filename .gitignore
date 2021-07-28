@@ -1,2 +1,2 @@
 .env
-./prometheus/data
+./prometheus/data/*
