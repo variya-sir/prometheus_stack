@@ -1,12 +1,11 @@
-#!make
-include .env
+help: ## Show help for each command
+	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
 
-all: exportenv
-		docker compose up
+install: ## Install local development
+	./install.sh
 
-# Export secret variables from .env to .yml files
-exportenv:
-		set -a ; source .env ; envsubst < alertmanager/alertmanager.yml.in > alertmanager/alertmanager.yml
+run: ## Run prometheus stack
+	docker-compose up
 
-clean:
-		docker-compose down -v
+clean: ## Clean up prometheus stack
+	docker-compose down -v

@@ -1,14 +1,12 @@
+# https://prometheus.io/docs/alerting/latest/configuration/#configuration-file
 global:
   # TODO: try using makefile and envsubst
   # alertmanager program can read only input from .yml file.
   # It does not support for getting environment variable 
-  smtp_smarthost: 'SMARTHOST'
-  smtp_from: '$SMTPFROM'
-  smtp_auth_username: '$SMTPAUTHUSERNAME'
-  smtp_auth_password: '$SMTPAUTHPASSWORD'
-
-# templates:
-#   - '/etc/alertmanager/template/*.tmpl'
+  smtp_smarthost: '$AL_SMARTHOST'
+  smtp_from: '$AL_SMTPFROM'
+  smtp_auth_username: '$AL_SMTPAUTHUSERNAME'
+  smtp_auth_password: '$AL_SMTPAUTHPASSWORD'
 
 route:
   receiver: admin
@@ -16,4 +14,4 @@ route:
 receivers:
   - name: admin
     email_configs:
-      - to: '$TO'
+      - to: '$AL_TO'
