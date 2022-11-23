@@ -31,21 +31,9 @@ scrape_configs:
   
   # node_exporter must be installed in the host machine first
   # target ip must be host ip
-  - job_name: 'node_exporter'
-    static_configs:
-    - targets: ['192.168.1.179:9100']
-
-  # prom_com_usage_exporter must be execute on the host machine first
-  # target ip must be host ip
-  - job_name: 'python_com_usage_exporter'
-    static_configs:
-    - targets: ['192.168.1.179:8001']
-
-  # go_counter_exporter must be execute on the host machine first
-  # target ip must be host ip
-  - job_name: 'go_counter_exporter'
-    static_configs:
-    - targets: ['192.168.1.179:8007']
+  # - job_name: 'node_exporter'
+  #   static_configs:
+  #   - targets: ['192.168.1.179:9100']
 
   - job_name: 'cloudwatch_exporter'
     static_configs:
